@@ -1,0 +1,27 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Pay";
+}
+
+<h1>Pay</h1>
+
+<h3>You have to pay: @Html.DisplayNameFor(model => model.Ticket.Price)</h3>
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.LicenseNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.LicenseNumber)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="@Model.Car.Id" />
+        <input type="submit" value="Pay" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
