@@ -31,6 +31,10 @@ namespace ParkingApp.Services
         public async Task<Car> GetParkedCarById(int? id)
         {
             var carDTO = await _context.Cars.FindAsync(id);
+            if (carDTO == null)
+            {
+                return null;
+            }
             var car = _mapper.Map<Car>(carDTO);
             return car;
         }
@@ -43,11 +47,20 @@ namespace ParkingApp.Services
             return cars;
         }
 
-        public async Task Park(Car car)
+        public async Task<bool> Park(Car car)
         {
+            var parkedCar = GetParkedCarById(car.Id);
+
+            if (parkedCar != null)
+            {
+                return false;
+            }
+
             var carDTO = _mapper.Map<CarDTO>(car);
             _context.Add(carDTO);
             await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

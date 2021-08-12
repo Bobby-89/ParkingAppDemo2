@@ -10,7 +10,7 @@ namespace ParkingApp.Services
     {
         public Task<List<Car>> GetAllParkedCars();
         public Task<Car> GetParkedCarById(int? id);
-        public Task Park(Car car);
+        public Task<bool> Park(Car car);
         public Task Exit(int id);
     }
 }

@@ -55,12 +55,18 @@ namespace ParkingApp.Controllers
         // POST: Vehicles/Create
         [HttpPost]
         public async Task<IActionResult> Park([Bind("Id,LicenseNumber")] Car car)
-        {
+        {          
+
             if (ModelState.IsValid)
             {
-                await _parkingService.Park(car);
-                var ticket = new Ticket(car);
-                await _ticketService.Create(ticket);
+                var isAlreadyParked = await _parkingService.Park(car);
+
+                //if (isAlreadyParked)
+                //{
+                //    return Conflict();
+                //}
+                //var ticket = new Ticket(car);
+                //await _ticketService.Create(ticket);
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
