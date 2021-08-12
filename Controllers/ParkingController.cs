@@ -53,8 +53,6 @@ namespace ParkingApp.Controllers
         }
 
         // POST: Vehicles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public async Task<IActionResult> Park([Bind("Id,LicenseNumber")] Car car)
         {
@@ -83,18 +81,19 @@ namespace ParkingApp.Controllers
                 return NotFound();
             }
 
-            var ticket = await _ticketService.Exit(id);
+            //var ticket = await _ticketService.Exit(id);
 
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+            //if (ticket == null)
+            //{
+            //    return NotFound();
+            //}
 
+            return View(car);
 
-            ViewModel viewModel = new ViewModel();
-            viewModel.Car = car;
-            viewModel.Ticket = ticket;
-            return View(viewModel);
+            //ViewModel viewModel = new ViewModel();
+            //viewModel.Car = car;
+            //viewModel.Ticket = ticket;
+            //return View(viewModel);
         }
 
         // POST: Vehicles/Delete/5
